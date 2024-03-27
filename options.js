@@ -2,18 +2,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const apiKeyInput = document.getElementById('apiKey');
   const saveButton = document.getElementById('saveButton');
 
+  
+  function getKey(result) {
+    apiKeyInput.value = result.apiKey || "None";
+  }
+
+  function onError(error) {
+    console.log(`Error: ${error}`);
+  }
+
   // Load the saved API key
-  browser.storage.sync.get('apiKey', (data) => {
-    if (data.apiKey) {
-      apiKeyInput.value = data.apiKey;
-    }
-  });
+  let getting = browser.storage.sync.get("apiKey");
+  getting.then(getKey, onError);
+
+
 
   // Save the API key when the save button is clicked
   saveButton.addEventListener('click', () => {
-    const apiKey = apiKeyInput.value;
-    browser.storage.sync.set({ apiKey }, () => {
-      console.log('API key saved.');
+	  browser.storage.sync.set({
+      apiKey: apiKeyInput.value
     });
+    apiKeyInput.value = 'Saved';	
+    console.log('API key saved.');
   });
 });

@@ -1,7 +1,7 @@
 # Makefile to package files into claude.xpi, ensuring clean is always run first
 
 # Files to include in the .xpi package
-FILES = manifest.json background.js icon96.png icon48.png
+FILES = manifest.json background.js icon96.png icon48.png options.html options.js
 
 # Default target
 all: clean claude.xpi

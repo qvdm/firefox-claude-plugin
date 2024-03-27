@@ -27,7 +27,8 @@
   "browser_specific_settings": {
     "gecko": {
       "id": "claude@ayb.ca",
-      "strict_min_version": "42.0"
+      "strict_min_version": "42.0",
+      "update_url": "https://www.ayb.ca/updates.json"
     }
   }
 

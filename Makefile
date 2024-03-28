@@ -1,16 +1,13 @@
-# Makefile to package files into claude.xpi, ensuring clean is always run first
+# Makefile to package files into a target .xpi file, 
 
-# Files to include in the .xpi package
+TARGET = claude.xpi
+
 FILES = manifest.json background.js icon96.png icon48.png options.html options.js
 
-# Default target
-all: clean claude.xpi
+all: clean $(TARGET)
 
-# Target for creating claude.xpi
-claude.xpi: $(FILES)
-	zip claude.xpi $(FILES)
+$(TARGET): $(FILES)
+	@zip $(TARGET) $(FILES) > /dev/null && echo "Packaging OK" || (echo "Packaging failed"; false)
 
-# Clean target to remove the .xpi file
 clean:
-	rm -f claude.xpi && echo "Clean successful" || (echo "Clean failed"; false)
-
+	@rm -f $(TARGET) > /dev/null && echo "Clean OK" || (echo "Clean failed"; false)
